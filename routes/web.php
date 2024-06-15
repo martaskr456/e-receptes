@@ -10,17 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// About page route
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-// Contact page route
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-// Dashboard route and other authenticated routes...
+// Dashboard route
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -36,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
     Route::delete('admin/{recipe}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
-    // Profile routes (if needed)
+    // Profile routes
     Route::get('profile/edit', function () {
         return view('profile.edit');
     })->name('profile.edit')->middleware('verified');
