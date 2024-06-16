@@ -1,97 +1,51 @@
 <!DOCTYPE html>
-<html lang="lv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-receptes</title>
-    <style>
-        /* Some basic styling, adjust as needed */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #333;
-            color: white;
-            padding: 1rem;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 1rem;
-        }
-        .banner {
-            text-align: center;
-            margin-top: 2rem;
-        }
-        .banner img {
-            max-width: 100%;
-        }
-        .banner h2 {
-            margin-top: 1rem;
-            font-size: 2rem;
-        }
-        .recipe-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        .recipe-card {
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-            width: calc(33.33% - 1rem);
-            text-align: center;
-        }
-        .recipe-card:hover {
-            transform: translateY(-5px);
-        }
-        .recipe-card img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-    </style>
+    <title>Recepšu e-grāmata</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="path/to/your/script.js"></script>
 </head>
 <body>
-    <header class="navbar">
-        <div>
-            <a href="{{ route('welcome') }}" style="font-weight: bold;">e-receptes</a>
-        </div>
-        <div>
-            <a href="{{ route('welcome') }}">Sākums</a>
-            <a href="{{ route('about') }}">Par</a>
-            <a href="{{ route('contacts') }}">Kontakti</a>
-        </div>
+    <header>
+        <nav id="navbar">
+            <ul>
+                <li class="brand">e-Receptes</li>
+                <li><a href="{{ route('home') }}">Sākums</a></li>
+                <li><a href="{{ route('info') }}">Par</a></li>
+                <li><a href="{{ route('contact') }}">Kontakti</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <div class="banner">
-        <img src="/images/banner-image.jpg" alt="Recepšu e-grāmata">
-        <h2>Recepšu e-grāmata</h2>
-        <div>
-            <a href="{{ route('login') }}" style="margin-right: 1rem;">Ienākt</a>
-            <a href="{{ route('register') }}">Reģistrēties</a>
-        </div>
+    <div id="banner" style="background-image: url('{{ asset('images/banner-image.png') }}');">
+        <div class="banner-content">Recepšu e-grāmata</div>
+    </div>
+    <div class="login-register">
+        <section id="login">
+            <form action="{{ route('login') }}" method="GET">
+                @csrf
+                <button type="submit">Ienākt</button>
+            </form>
+        </section>
+        
+        <p>vai</p>
+        <section id="register">
+            <form action="{{ route('register') }}" method="GET">
+                @csrf
+                <button type="submit">Reģistrēties</button>
+            </form>
+        </section>
     </div>
 
-    <div class="recipe-list">
-        @foreach ($recipes as $recipe)
-            <div class="recipe-card">
-                <img src="{{ $recipe->image_url }}" alt="{{ $recipe->title }}">
-                <h3>{{ $recipe->title }}</h3>
-                <p>Pagatavošanas laiks: {{ $recipe->cooking_time }} min</p>
-                <a href="{{ route('recipes.show', $recipe->id) }}">Skatīt recepti</a>
-            </div>
-        @endforeach
-    </div>
+    <section id="public-recipes">
+        <h2>Public Recipes</h2>
+        <!-- Add a grid or list of public recipes (photo, title, cooking time) -->
+    </section>
+    <footer>
+        <!-- Your footer content -->
+    </footer>
 
 </body>
 </html>
+
