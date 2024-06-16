@@ -8,14 +8,7 @@
 </head>
 <body>
     <header>
-        <nav id="navbar">
-            <ul>
-                <li class="brand">e-Receptes</li>
-                <li><a href="{{ route('home') }}">Sākums</a></li>
-                <li><a href="{{ route('info') }}">Par</a></li>
-                <li><a href="{{ route('contact') }}">Kontakti</a></li>
-            </ul>
-        </nav>
+        @include('layouts.navigation')
     </header>
 
     <div class="content_contact">

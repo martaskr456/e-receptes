@@ -5,11 +5,21 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 
 // Public routes
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+// Dashboard route (redirects authenticated users to dashboard)
+Route::get('/dashboard', function() {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 
 Route::get('/info', function () {
     return view('info');
@@ -20,6 +30,13 @@ Route::post('/submit-contact-form', [ContactController::class, 'submitForm'])->n
 Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
 Route::post('/submit_contact_form', [ContactController::class, 'submitForm'])->name('submit_contact_form');
 
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+
+// Registration Routes...
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
 
 // Dashboard route
 Route::middleware(['auth'])->group(function () {
@@ -57,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
         })->name('profile.destroy')->middleware('verified');
     });
 });
+
 
 // Auth routes (located in 'routes/auth.php')
 require __DIR__.'/auth.php';

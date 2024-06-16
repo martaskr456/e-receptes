@@ -5,18 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recepšu e-grāmata</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <script src="path/to/your/script.js"></script>
 </head>
 <body>
     <header>
-        <nav id="navbar">
-            <ul>
-                <li class="brand">e-Receptes</li>
-                <li><a href="{{ route('home') }}">Sākums</a></li>
-                <li><a href="{{ route('info') }}">Par</a></li>
-                <li><a href="{{ route('contact') }}">Kontakti</a></li>
-            </ul>
-        </nav>
+        @include('layouts.navigation')
     </header>
     <div id="banner" style="background-image: url('{{ asset('images/banner-image.png') }}');">
         <div class="banner-content">Recepšu e-grāmata</div>
@@ -42,10 +34,7 @@
         <h2>Public Recipes</h2>
         <!-- Add a grid or list of public recipes (photo, title, cooking time) -->
     </section>
-    <footer>
-        <!-- Your footer content -->
-    </footer>
-
 </body>
 </html>
+
 

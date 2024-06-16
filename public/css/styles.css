@@ -20,19 +20,50 @@ nav ul {
 
 nav ul li {
     margin-right: 40px;
+    position: relative; /* Papildinājums: Lai dropdown strādātu pareizi */
 }
 
 nav ul li a {
     text-decoration: none;
     text-transform: uppercase;
     color: black;
-    padding: 10px; 
+    padding: 10px;
+    transition: background-color 0.3s ease;
 }
 
 nav ul .brand {
     margin-left: 20px;
     flex-grow: 1;
     text-transform: none;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 200px; /* Adjust width as needed */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
 }
 
 #banner {

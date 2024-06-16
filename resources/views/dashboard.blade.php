@@ -1,34 +1,76 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sākums - e-Receptes</title>
+    <link rel="stylesheet" href="{{ asset('css/styles_auth.css') }}">
+    <!-- Include any other CSS or JavaScript files -->
+</head>
+<body>
+    <header>
+        @include('layouts.navigation')
+    </header>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <p>{{ __("Welcome to your Dashboard!") }}</p>
-                    <p>{{ __("You're logged in as") }} {{ Auth::user()->name }}</p>
-                    <p>{{ __("Role:") }} {{ Auth::user()->role}}</p>
-                    <p>{{ __("Email:") }} {{ Auth::user()->email }}</p>
-
-                    <div class="mt-6">
-                        <ul>
-                            <li>{{ __("Recent Activity") }}</li>
-                            <li>{{ __("You logged in.") }}</li>
-                            <li>{{ __("Uploaded a new recipe.") }}</li>
-                        </ul>
-                    </div>
-                    <div class="mt-6">
-                        <a href="{{ route('profile.edit') }}" class="text-blue-500 hover:text-blue-700">{{ __("Edit Profile") }}</a>
-                    </div>
-                </div>
+    <main>
+        <section id="public-recipes">
+            <h2>Publiskās receptes</h2>
+            <!-- Display public recipes with sorting and filtering options -->
+            <!-- Example: Add buttons or dropdowns for sorting and filtering -->
+            <div class="sorting-options">
+                <label for="sort">Kārtot pēc:</label>
+                <select id="sort">
+                    <option value="newest">Jaunākās</option>
+                    <option value="popular">Populārākās</option>
+                    <option value="top-rated">Visaugstāk novērtētās</option>
+                </select>
+                <!-- Add filter options if needed -->
             </div>
-        </div>
-    </div>
-</x-app-layout>
+            <div class="recipe-list">
+                <!-- Render public recipes dynamically -->
+                <!-- Example: Loop through recipes and display them -->
+                <div class="recipe">
+                    <h3>Receptes nosaukums</h3>
+                    <p>Laiks: xx min</p>
+                    <img src="recipe-image.jpg" alt="Receptes attēls">
+                </div>
+                <!-- Repeat for other recipes -->
+            </div>
+        </section>
+
+        <section id="my-recipes">
+            <h2>Manas receptes</h2>
+            <!-- Display recipes created by the user -->
+            <!-- Example: List user's recipes with links to each recipe -->
+            <div class="recipe">
+                <h3>Manas receptes nosaukums</h3>
+                <p>Laiks: xx min</p>
+                <img src="recipe-image.jpg" alt="Manas receptes attēls">
+            </div>
+            <!-- Repeat for other user recipes -->
+        </section>
+
+        <section id="liked-recipes">
+            <h2>Manas "Patīk" receptes</h2>
+            <!-- Display recipes liked by the user -->
+            <!-- Example: List liked recipes with links to each recipe -->
+            <div class="recipe">
+                <h3>Receptes nosaukums</h3>
+                <p>Laiks: xx min</p>
+                <img src="liked-recipe-image.jpg" alt="Receptes attēls">
+            </div>
+            <!-- Repeat for other liked recipes -->
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <!-- Include any scripts you need -->
+</body>
+</html>
+
 
 
 
