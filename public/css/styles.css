@@ -1,3 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    padding: 40px;
+    margin-bottom: 20px;
+}
+
 nav {
     width: 100%;
     background-color: #ffffff;
@@ -240,4 +251,14 @@ nav ul .brand {
 
 .content_contact form button:hover {
     background-color: #45a049;
+}
+
+footer {
+    background-color: #f8f9fa;
+    color: #FF8C00;
+    text-align: center;
+    padding-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
