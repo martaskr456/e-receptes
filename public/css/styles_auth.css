@@ -41,6 +41,7 @@ nav ul .brand {
     flex-grow: 1;
     text-transform: none;
 }
+
 .dropdown {
     position: relative;
 }
@@ -71,50 +72,139 @@ nav ul .brand {
 }
 
 main {
-    margin-top: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px; /* Adjusted to make space for nav bar */
+    padding-top: 120px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 1000; /* Lielāks z-index, lai būtu virs jaunās joslas */
+    padding: 10px 0;
+    box-shadow: 0 4px 6px -6px #222;
+
+}
+
+/* Stils jaunajai filtrēšanas joslai (nav.filters-nav) */
+nav.filters-nav {
+    position: fixed;
+    display: flex;
+    top: 60px; /* Attālums no augšas, pielāgojiet atbilstoši jūsu dizainam */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 999; /* Mazāks z-index nekā header, bet joprojām pārāk tam, lai būtu virs pārējā satura */
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px -6px #222;
+    
+}
+
+nav.filters-nav .filters {
+    display: flex;
+    align-items: center;
+}
+
+nav.filters-nav label,
+nav.filters-nav select,
+nav.filters-nav input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+nav.filters-nav button.add-recipe-btn {
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+nav.filters-nav button.add-recipe-btn:hover {
+    background-color: #FFA726;
+}
+
+
+aside {
+    width: 170px; /* Adjusted width */
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added box shadow */
+}
+
+aside h3 {
+    text-transform: uppercase;
+    color: rgb(64, 64, 131);
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+
+aside ul{
+  border-bottom: 1px solid rgb(64, 64, 131);
+  padding-top: 10px;
+  padding-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+aside li a {
+    color: rgba(64, 64, 131, 0.7);
+    text-decoration: none;
+    text-transform: none;
+    display: block;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+}
+
+aside li a:hover {
+    color: rgb(64, 64, 131);
 }
 
 section {
-    background-color: #ffffff;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-h2 {
-    margin-bottom: 10px;
-    color: #007bff;
-}
-
-.recipe-list {
+    width: 75%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
 }
 
-.recipe {
-    border: 1px solid #ccc;
-    padding: 10px;
+article.recipe {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
 }
 
-.recipe h3 {
-    margin-bottom: 5px;
-    font-size: 1.1em;
-}
-
-.recipe p {
-    margin-bottom: 10px;
-}
-
-.recipe img {
+article img {
     width: 100%;
     height: auto;
+    border-radius: 5px;
+}
+
+.recipe-title {
+    color: rgb(64, 64, 131);
+    font-weight: bold;
     margin-top: 10px;
 }
 
+.recipe-time {
+    color: rgba(64, 64, 131, 0.7);
+    margin-top: 5px;
+}
+
 footer {
-    background-color: #333;
-    color: #ffffff;
+    background-color: #f8f9fa;
+    color: #FF8C00;
     text-align: center;
     padding: 10px 0;
     position: fixed;

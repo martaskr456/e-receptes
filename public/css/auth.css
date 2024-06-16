@@ -1,0 +1,46 @@
+/* auth.css  pagaidām neiet kā vajag, 
+jo nevar dabūt baneri, 
+kā fonu zem reģistrēšanas, 
+tāpēc pagaidām arī lai paliek. 
+Ar reģistrēšanos izdarīts:
+iztulkots reģistrācijas teksts latviski*/
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f8f9fa; /* Aizstāj ar savu vēlamo fona krāsu */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: linear-gradient(to bottom right, #FF8C00, #4CAF50); /* Lineārā gradienta fons */
+}
+
+.form-wrapper {
+    background-color: rgba(255, 255, 255, 0.9); /* Baltā krāsa ar caurspīdīgumu */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e07b00;
+}

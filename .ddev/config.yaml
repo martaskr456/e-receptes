@@ -1,5 +1,5 @@
-name: exam
-type: laravel
+name: e-receptes-main
+type: php
 docroot: public
 php_version: "8.3"
 webserver_type: nginx-fpm

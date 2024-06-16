@@ -12,54 +12,77 @@
         @include('layouts.navigation')
     </header>
 
+    <nav class="filters-nav">
+        <div class="filters">
+            <label for="sort">Kārtošana pēc:</label>
+            <select id="sort">
+                <option value="nosaukums">Nosaukums</option>
+                <option value="laiks">Gatavošanas laiks</option>
+            </select>
+            <label for="category">Kategorija:</label>
+            <select id="category">
+                <option value="zupas">Zupas</option>
+                <option value="kukas">Kūkas</option>
+                <!-- Ielieciet citas kategorijas pēc vajadzības -->
+            </select>
+            <label for="vegetarian">Veģetārisks:</label>
+            <input type="checkbox" id="vegetarian">
+            <label for="gluten-free">Bezglutēna:</label>
+            <input type="checkbox" id="gluten-free">
+        </div>
+        <button class="add-recipe-btn">Pievienot</button>
+    </nav>
+
     <main>
-        <section id="public-recipes">
-            <h2>Publiskās receptes</h2>
-            <!-- Display public recipes with sorting and filtering options -->
-            <!-- Example: Add buttons or dropdowns for sorting and filtering -->
-            <div class="sorting-options">
-                <label for="sort">Kārtot pēc:</label>
-                <select id="sort">
-                    <option value="newest">Jaunākās</option>
-                    <option value="popular">Populārākās</option>
-                    <option value="top-rated">Visaugstāk novērtētās</option>
-                </select>
-                <!-- Add filter options if needed -->
-            </div>
-            <div class="recipe-list">
-                <!-- Render public recipes dynamically -->
-                <!-- Example: Loop through recipes and display them -->
-                <div class="recipe">
-                    <h3>Receptes nosaukums</h3>
-                    <p>Laiks: xx min</p>
-                    <img src="recipe-image.jpg" alt="Receptes attēls">
+        <aside>
+            <h3>Ēdienreize</h3>
+            <ul class="side-list">
+                <li><a href="brokastis.html">Brokastis</a></li>
+                <li><a href="pusdienas.html">Pusdienas</a></li>
+                <li><a href="vakarinas.html">Vakariņas</a></li>
+                <li><a href="uzkodas.html">Uzkodas</a></li>
+                <li><a href="dzerieni.html">Dzērieni</a></li>
+            </ul>
+            <h3>Receptes</h3>
+            <ul class="side-list">
+                <li><a href="zupas.html">Zupas</a></li>
+                <li><a href="salati.html">Salāti un uzkodas</a></li>
+                <li><a href="pamatedieni.html">Pamatēdieni</a></li>
+                <li><a href="merces.html">Mērces</a></li>
+                <li><a href="kukas.html">Kūkas</a></li>
+                <li><a href="deserti.html">Deserti</a></li>
+                <li><a href="marinejumi.html">Marinējumi</a></li>
+                <li><a href="pankukas.html">Pankūkas</a></li>
+            </ul>
+        </aside>
+        <section>
+            <article id="recipe1" class="recipe">
+                <a href="recipe1.html">
+                    <img src="images/pancake.jpg" alt="Food photo">
+                </a>
+                <div class="recipe-data">
+                    <div class="recipe-title"> Biezās pankūkas</div>
+                    <div class="recipe-time"> 30min</div>
                 </div>
-                <!-- Repeat for other recipes -->
-            </div>
-        </section>
-
-        <section id="my-recipes">
-            <h2>Manas receptes</h2>
-            <!-- Display recipes created by the user -->
-            <!-- Example: List user's recipes with links to each recipe -->
-            <div class="recipe">
-                <h3>Manas receptes nosaukums</h3>
-                <p>Laiks: xx min</p>
-                <img src="recipe-image.jpg" alt="Manas receptes attēls">
-            </div>
-            <!-- Repeat for other user recipes -->
-        </section>
-
-        <section id="liked-recipes">
-            <h2>Manas "Patīk" receptes</h2>
-            <!-- Display recipes liked by the user -->
-            <!-- Example: List liked recipes with links to each recipe -->
-            <div class="recipe">
-                <h3>Receptes nosaukums</h3>
-                <p>Laiks: xx min</p>
-                <img src="liked-recipe-image.jpg" alt="Receptes attēls">
-            </div>
-            <!-- Repeat for other liked recipes -->
+            </article>
+            <article id="recipe2" class="recipe">
+                <a href="recipe2.html">
+                    <img src="images/patato_pancake.jpg" alt="Food photo">
+                </a>
+                <div class="recipe-data">
+                    <div class="recipe-title"> Kartupeļu pankūkas</div>
+                    <div class="recipe-time"> 30min</div>
+                </div>
+            </article>
+            <article id="recipe3" class="recipe">
+                <a href="recipe3.html">
+                    <img src="images/pumkin.jpg" alt="Food photo">
+                </a>
+                <div class="recipe-data">
+                    <div class="recipe-title"> Ķirbju krēmzupa</div>
+                    <div class="recipe-time"> 30min</div>
+                </div>
+            </article>
         </section>
     </main>
 
@@ -71,11 +94,5 @@
           Autors: <ins>Marta Karīna Skrastiņa (mk23123) & Ivo Aļļēns (ia23031)</ins>
         </p>
     </footer>
-
-    <!-- Include any scripts you need -->
 </body>
 </html>
-
-
-
-
