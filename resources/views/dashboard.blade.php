@@ -27,8 +27,6 @@
             </select>
             <label for="vegetarian">Veģetārisks:</label>
             <input type="checkbox" id="vegetarian">
-            <label for="gluten-free">Bezglutēna:</label>
-            <input type="checkbox" id="gluten-free">
         </div>
         <button class="add-recipe-btn">Pievienot</button>
     </nav>

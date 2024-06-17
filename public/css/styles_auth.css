@@ -33,7 +33,7 @@ nav ul li a {
     text-decoration: none;
     text-transform: uppercase;
     color: black;
-    padding: 10px; 
+    padding: 10px;
 }
 
 nav ul .brand {
@@ -52,7 +52,7 @@ nav ul .brand {
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    width: 200px; 
+    width: 200px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -76,7 +76,7 @@ main {
     display: flex;
     justify-content: space-between;
     margin-top: 80px; /* Adjusted to make space for nav bar */
-    padding-top: 120px;
+    padding-top: 50px;
 }
 
 header {
@@ -88,7 +88,6 @@ header {
     z-index: 1000; /* Lielāks z-index, lai būtu virs jaunās joslas */
     padding: 10px 0;
     box-shadow: 0 4px 6px -6px #222;
-
 }
 
 /* Stils jaunajai filtrēšanas joslai (nav.filters-nav) */
@@ -101,8 +100,9 @@ nav.filters-nav {
     background-color: #ffffff;
     z-index: 999; /* Mazāks z-index nekā header, bet joprojām pārāk tam, lai būtu virs pārējā satura */
     padding: 10px 20px;
+    box-shadow: none;
+    border: none;
     box-shadow: 0 4px 6px -6px #222;
-    
 }
 
 nav.filters-nav .filters {
@@ -125,12 +125,15 @@ nav.filters-nav button.add-recipe-btn {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: absolute;
+    
+    right: 20px; /* attālums no labās puses */
+    transform: translateY(-50%); /* centrs vertikāli */
 }
 
 nav.filters-nav button.add-recipe-btn:hover {
     background-color: #FFA726;
 }
-
 
 aside {
     width: 170px; /* Adjusted width */
@@ -138,7 +141,8 @@ aside {
     margin-left: 20px;
     margin-right: 20px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added box shadow */
+    position: sticky; /* Saglabāt aside, lai tas paliktu redzams, kad tiek ritināta */
+    
 }
 
 aside h3 {
@@ -149,13 +153,12 @@ aside h3 {
     margin-bottom: 15px;
 }
 
-
-aside ul{
-  border-bottom: 1px solid rgb(64, 64, 131);
-  padding-top: 10px;
-  padding-bottom: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+aside ul:not(:last-child) {
+    border-bottom: 1px solid rgb(64, 64, 131);
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 aside li a {
@@ -172,10 +175,12 @@ aside li a:hover {
 }
 
 section {
-    width: 75%;
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
+    max-height: calc(100vh - 200px); /* Piemērots augstums, pielāgojiet pēc vajadzības */
+    overflow-y: auto;
 }
 
 article.recipe {
@@ -183,6 +188,10 @@ article.recipe {
     padding: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 5px;
+    max-width: 450px; /* Norādiet maksimālo platumu, lai saglabātu izmēru */
+    max-height: 400px; /* Piemēram, norādiet maksimālo augstumu */
+    overflow-y: auto; /* Pielāgojiet overflow, ja saturš iziet no maksimālās augstuma */
+    margin: 0 auto; /* Centrējiet elementu, ja vēlaties, lai tas būtu centrā */
 }
 
 article img {
