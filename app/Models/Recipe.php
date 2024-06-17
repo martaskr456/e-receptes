@@ -10,11 +10,12 @@ class Recipe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'is_public',
-        'cooking_time',
-        'products',
-        'instructions',
+        'title', 'cooking_time', 'ingredients', 'instructions', 'category_id', 'is_private', 'user_id', 'image'
     ];
+
+    // Attiecība ar lietotāju (pieņemot, ka recepte pieder lietotājam)
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

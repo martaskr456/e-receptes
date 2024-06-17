@@ -44,7 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Recipes routes
     Route::prefix('recipes')->group(function () {
-        Route::get('/create', [RecipeController::class, 'create'])->name('recipes.create');
+        Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+        Route::post('/recipes/store', [RecipeController::class, 'store'])->name('recipes.store');
         Route::post('/', [RecipeController::class, 'store'])->name('recipes.store');
         Route::get('/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
         Route::put('/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');

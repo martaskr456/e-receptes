@@ -28,7 +28,7 @@
             <label for="vegetarian">Veģetārisks:</label>
             <input type="checkbox" id="vegetarian">
         </div>
-        <button class="add-recipe-btn">Pievienot</button>
+        <a href="{{ route('recipes.create') }}" class="add-recipe-btn">Pievienot</a>
     </nav>
 
     <main>

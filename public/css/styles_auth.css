@@ -116,23 +116,18 @@ nav.filters-nav input[type="checkbox"] {
     margin-right: 10px;
 }
 
-nav.filters-nav button.add-recipe-btn {
-    background-color: #FF8C00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute;
-    
-    right: 20px; /* attālums no labās puses */
-    transform: translateY(-50%); /* centrs vertikāli */
+.add-recipe-btn {
+    text-decoration: none;
+    text-transform: uppercase;
+    float: right; /* Poga novietota labajā pusē */
+    background-color: #ffcc00;
+    padding: 12px 24px; /* Palielināt pogas apmēru */
+    border-radius: 10px;
 }
 
-nav.filters-nav button.add-recipe-btn:hover {
-    background-color: #FFA726;
+.add-recipe-btn:hover {
+    background-color: #ffd21d; /* Mainīt fona krāsu, kad hovero */
+    color: white; /* Mainīt teksta krāsu, kad hovero */
 }
 
 aside {
