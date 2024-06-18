@@ -11,46 +11,30 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'role', // Add 'role' here
+        'role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed', // Assuming you are using hashed passwords
+        'password' => 'hashed',
     ];
 
-    /**
-     * Get the user's role.
-     *
-     * @return string|null
-     */
     public function getRoleAttribute()
     {
         return $this->attributes['role'] ?? 'user';
     }
 
+    public function likedRecipes()
+    {
+        return $this->belongsToMany(Recipe::class, 'likes');
+    }
 }

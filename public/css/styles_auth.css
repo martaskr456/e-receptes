@@ -23,6 +23,15 @@ nav ul {
     padding: 0;
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.user-dropdown {
+    margin-left: auto; /* Push user dropdown to the right */
+}
+
+.user-dropdown .dropdown-content {
+    right: 0; /* Align dropdown content to the right */
 }
 
 nav ul li {

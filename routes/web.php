@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -38,11 +37,16 @@ Route::post('register', [RegisterController::class, 'register']);
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [RecipeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 
     // Recipes routes
     Route::prefix('recipes')->group(function () {
         Route::get('/create', [RecipeController::class, 'create'])->name('recipes.create');
         Route::post('/store', [RecipeController::class, 'store'])->name('recipes.store');
+        Route::get('/mine', [RecipeController::class, 'myRecipes'])->name('recipes.mine');
+        Route::get('/public', [RecipeController::class, 'publicRecipes'])->name('recipes.public');
+        Route::get('/liked', [RecipeController::class, 'likedRecipes'])->name('recipes.liked');
+        Route::post('/{recipe}/like', [RecipeController::class, 'likeRecipe'])->name('recipes.like');
         Route::get('/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
         Route::get('/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
         Route::put('/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');

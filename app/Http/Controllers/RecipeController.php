@@ -12,7 +12,11 @@ class RecipeController extends Controller
     public function dashboard(Request $request)
     {
         $categories = Category::all();
-        $recipes = Recipe::query();
+        $recipes = Recipe::query()
+            ->where(function ($query) {
+                $query->where('is_private', false)
+                    ->orWhere('user_id', Auth::id());
+            });
 
         if ($request->has('category') && !in_array('all', $request->category)) {
             $recipes->whereIn('category_id', $request->category);
@@ -30,8 +34,31 @@ class RecipeController extends Controller
         return view('dashboard', compact('recipes', 'categories'));
     }
 
+    public function myRecipes()
+    {
+        $recipes = Recipe::where('user_id', Auth::id())->get();
+        return view('recipes.mine', compact('recipes'));
+    }
+
+    public function publicRecipes()
+    {
+        $recipes = Recipe::where('is_private', false)->get();
+        return view('recipes.public', compact('recipes'));
+    }
+
+    public function likedRecipes()
+    {
+        $user = Auth::user();
+        $recipes = $user->likedRecipes; // Assuming there's a likedRecipes relation
+        return view('recipes.liked', compact('recipes'));
+    }
+
     public function show(Recipe $recipe)
     {
+        if ($recipe->is_private && $recipe->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access');
+        }
+
         return view('recipes.show', compact('recipe'));
     }
 
@@ -50,37 +77,43 @@ class RecipeController extends Controller
             'instructions' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'visibility' => 'required|in:private,public',
-            'image' => 'required|image|max:5120', // Maksimālais izmērs 5 MB
+            'image' => 'required|image|max:5120',
         ]);
-    
+
         $validatedData['user_id'] = Auth::id();
         $validatedData['is_private'] = $request->visibility === 'private';
-    
-        // Saglabā attēlu publiskajā direktorijā
+
         $validatedData['image'] = $request->file('image')->store('recipe_images', 'public');
-    
+
         Recipe::create($validatedData);
-    
+
         return redirect()->route('dashboard')->with('success', 'Recepte veiksmīgi pievienota!');
     }
-    
 
     public function edit(Recipe $recipe)
     {
+        if ($recipe->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access');
+        }
+
         $categories = Category::all();
         return view('recipes.edit', compact('recipe', 'categories'));
     }
 
     public function update(Request $request, Recipe $recipe)
     {
+        if ($recipe->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access');
+        }
+
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'cooking_time' => 'required|integer|min:1',
             'ingredients' => 'required|string',
             'instructions' => 'required|string',
-            'image' => 'required|image|max:5120',
+            'image' => 'nullable|image|max:2048',
             'category_id' => 'required|exists:categories,id',
-            'is_private' => 'boolean',
+            'visibility' => 'required|in:private,public',
         ]);
 
         $recipe->title = $validatedData['title'];
@@ -88,7 +121,7 @@ class RecipeController extends Controller
         $recipe->ingredients = $validatedData['ingredients'];
         $recipe->instructions = $validatedData['instructions'];
         $recipe->category_id = $validatedData['category_id'];
-        $recipe->is_private = $request->has('is_private');
+        $recipe->is_private = $request->visibility === 'private';
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('recipe_images', 'public');
@@ -102,8 +135,24 @@ class RecipeController extends Controller
 
     public function destroy(Recipe $recipe)
     {
+        if ($recipe->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access');
+        }
+
         $recipe->delete();
 
         return redirect()->route('dashboard')->with('success', 'Recepte dzēsta veiksmīgi!');
+    }
+
+    public function likeRecipe(Recipe $recipe)
+    {
+        $user = Auth::user();
+        if ($user->likedRecipes()->where('recipe_id', $recipe->id)->exists()) {
+            $user->likedRecipes()->detach($recipe->id);
+        } else {
+            $user->likedRecipes()->attach($recipe->id);
+        }
+
+        return redirect()->back();
     }
 }

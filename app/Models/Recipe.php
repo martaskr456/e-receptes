@@ -20,9 +20,18 @@ class Recipe extends Model
         'image'
     ];
 
-    // Attiecība ar lietotāju (pieņemot, ka recepte pieder lietotājam)
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function likedBy()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
+
+    public function isPublic()
+    {
+        return !$this->is_private;
     }
 }
