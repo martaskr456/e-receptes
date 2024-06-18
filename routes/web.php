@@ -16,10 +16,7 @@ Route::get('/', function () {
 })->name('home');
 
 // Dashboard route (redirects authenticated users to dashboard)
-Route::get('/dashboard', function() {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+Route::get('/dashboard', [RecipeController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/info', function () {
     return view('info');
@@ -38,15 +35,15 @@ Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
 
-// Dashboard route
+// Authenticated routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [RecipeController::class, 'dashboard'])->name('dashboard');
 
     // Recipes routes
     Route::prefix('recipes')->group(function () {
-        Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
-        Route::post('/recipes/store', [RecipeController::class, 'store'])->name('recipes.store');
-        Route::post('/', [RecipeController::class, 'store'])->name('recipes.store');
+        Route::get('/create', [RecipeController::class, 'create'])->name('recipes.create');
+        Route::post('/store', [RecipeController::class, 'store'])->name('recipes.store');
+        Route::get('/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
         Route::get('/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
         Route::put('/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
         Route::delete('/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
@@ -75,7 +72,6 @@ Route::middleware(['auth'])->group(function () {
         })->name('profile.destroy')->middleware('verified');
     });
 });
-
 
 // Auth routes (located in 'routes/auth.php')
 require __DIR__.'/auth.php';

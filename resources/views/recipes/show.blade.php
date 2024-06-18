@@ -1,19 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<article>
     <h1>{{ $recipe->title }}</h1>
-    <p><strong>Autors:</strong> {{ $recipe->user->name }}</p>
-    <p><strong>Kategorija:</strong> {{ $recipe->category }}</p>
-    <p><strong>Grūtības līmenis:</strong> {{ $recipe->difficulty }}</p>
-    <p><strong>Pagatavošanas laiks:</strong> {{ $recipe->preparation_time }} minūtes</p>
-    <p><strong>Apraksts:</strong><br>{{ $recipe->description }}</p>
-    
-    @if (auth()->check() && auth()->id() == $recipe->user_id)
-        <a href="{{ route('recipes.edit', $recipe->id) }}">Rediģēt</a>
-        <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" style="display: inline-block;">
-            @csrf
-            @method('DELETE')
-            <button type="submit">Dzēst</button>
-        </form>
-    @endif
+    <img src="{{ str_starts_with($recipe->image, 'images/') ? asset($recipe->image) : asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}">
+    <div class="recipe-details">
+        <div><strong>Gatavošanas laiks:</strong> {{ $recipe->cooking_time }} min</div>
+        <div><strong>Sastāvdaļas:</strong> {!! nl2br(e($recipe->ingredients)) !!}</div>
+        <div><strong>Norādījumi:</strong> {!! nl2br(e($recipe->instructions)) !!}</div>
+    </div>
+</article>
 @endsection
