@@ -120,13 +120,13 @@ nav.filters-nav input[type="checkbox"] {
     text-decoration: none;
     text-transform: uppercase;
     float: right; /* Poga novietota labajā pusē */
-    background-color: #ffcc00;
+    background-color: #ff8c00d5;
     padding: 12px 24px; /* Palielināt pogas apmēru */
     border-radius: 10px;
 }
 
 .add-recipe-btn:hover {
-    background-color: #ffd21d; /* Mainīt fona krāsu, kad hovero */
+    background-color: #ff8c00d5; /* Mainīt fona krāsu, kad hovero */
     color: white; /* Mainīt teksta krāsu, kad hovero */
 }
 
