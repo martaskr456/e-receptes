@@ -134,10 +134,11 @@ class RecipeController extends Controller
 
         $recipe->save();
 
-        return redirect()->route('dashboard')->with('success', 'Recepte atjaunināta veiksmīgi!');
+        return redirect()->route('recipes.mine')->with('success', 'Recepte atjaunināta veiksmīgi!');
     }
 
-    public function destroy(Recipe $recipe)
+
+    public function destroy(Request $request, Recipe $recipe)
     {
         if ($recipe->user_id !== Auth::id()) {
             abort(403, 'Unauthorized access');
@@ -145,8 +146,14 @@ class RecipeController extends Controller
 
         $recipe->delete();
 
+        $redirect = $request->input('redirect', 'dashboard');
+        if ($redirect === 'mine') {
+            return redirect()->route('recipes.mine')->with('success', 'Recepte dzēsta veiksmīgi!');
+        }
+
         return redirect()->route('dashboard')->with('success', 'Recepte dzēsta veiksmīgi!');
     }
+
 
     public function likeRecipe(Recipe $recipe)
     {

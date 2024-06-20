@@ -206,6 +206,7 @@ main {
     display: flex;
     justify-content: center;
 }
+
 section {
     width: 90%;
     display: grid;

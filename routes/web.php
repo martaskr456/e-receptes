@@ -55,7 +55,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
         Route::get('/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
         Route::put('/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
-        Route::delete('/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+        Route::delete('/recipes/{recipe}/destroy', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+
     });
 
     // Admin routes

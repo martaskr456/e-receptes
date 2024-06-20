@@ -36,7 +36,7 @@
           &copy; <span id="info">2024 <br></span>
           <span class="footer-logo">TT2 eksāmena darbs - </span>
           <strong><i>"E-receptes" </i></strong><br>
-          Autors: <ins>Marta Karīna Skrastiņa (mk23123) & Ivo Aļļēns (ia23031)</ins>
+          Autors: <ins>Marta Karīna Skrastiņa (ms23123) & Ivo Aļļēns (ia23031)</ins>
         </p>
     </footer>
 </body>

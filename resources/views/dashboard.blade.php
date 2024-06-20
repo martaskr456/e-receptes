@@ -42,28 +42,32 @@
 
     <main>
         <section>
-            @foreach($recipes as $recipe)
-                <article class="recipe">
-                    <a href="{{ route('recipes.show', $recipe->id) }}">
-                        <img src="{{ str_starts_with($recipe->image, 'images/') ? asset($recipe->image) : asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}">
-                    </a>
-                    <div class="recipe-data">
-                        <div>
-                            <div class="recipe-title">{{ $recipe->title }}</div>
-                            <div class="recipe-time">{{ $recipe->cooking_time }} min</div>
+            @if($recipes->isEmpty())
+                <p>Šajā kategorijā pagaidām vēl nav receptes</p>
+            @else
+                @foreach($recipes as $recipe)
+                    <article class="recipe">
+                        <a href="{{ route('recipes.show', $recipe->id) }}">
+                            <img src="{{ str_starts_with($recipe->image, 'images/') ? asset($recipe->image) : asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}">
+                        </a>
+                        <div class="recipe-data">
+                            <div>
+                                <div class="recipe-title">{{ $recipe->title }}</div>
+                                <div class="recipe-time">{{ $recipe->cooking_time }} min</div>
+                            </div>
+                            <div>
+                                <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="like-button">
+                                        <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
+                                    </button>
+                                </form>
+                                <div class="recipe-author">{{ $recipe->user->name }}</div>
+                            </div>
                         </div>
-                        <div>
-                            <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="like-button">
-                                    <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
-                                </button>
-                            </form>
-                            <div class="recipe-author">{{ $recipe->user->name }}</div>
-                        </div>
-                    </div>
-                </article>
-            @endforeach
+                    </article>
+                @endforeach
+            @endif
         </section>
     </main>
 
@@ -72,33 +76,35 @@
             &copy; <span id="info">2024 <br></span>
             <span class="footer-logo">TT2 eksāmena darbs - </span>
             <strong><i>"E-receptes" </i></strong><br>
-            Autors: <ins>Marta Karīna Skrastiņa (mk23123) & Ivo Aļļēns (ia23031)</ins>
+            Autors: <ins>Marta Karīna Skrastiņa (ms23123) & Ivo Aļļēns (ia23031)</ins>
         </p>
     </footer>
-</body>
-<script>
-    function toggleSortOrder() {
-        var orderInput = document.getElementById('order');
-        orderInput.value = orderInput.value === 'asc' ? 'desc' : 'asc';
-        document.getElementById('filter-form').submit();
-    }
 
-    function toggleCheckboxes(checkbox) {
-        var checkboxes = document.querySelectorAll('.category-dropdown-content input[type="checkbox"]');
-        if (checkbox.value === 'all') {
-            checkboxes.forEach(function(cb) {
-                cb.checked = checkbox.checked;
-            });
-        } else {
-            var allChecked = true;
-            checkboxes.forEach(function(cb) {
-                if (cb.value !== 'all' && !cb.checked) {
-                    allChecked = false;
-                }
-            });
-            checkboxes[0].checked = allChecked;
+    <script>
+        function toggleSortOrder() {
+            var orderInput = document.getElementById('order');
+            orderInput.value = orderInput.value === 'asc' ? 'desc' : 'asc';
+            document.getElementById('filter-form').submit();
         }
-    }
-</script>
+
+        function toggleCheckboxes(checkbox) {
+            var checkboxes = document.querySelectorAll('.category-dropdown-content input[type="checkbox"]');
+            if (checkbox.value === 'all') {
+                checkboxes.forEach(function(cb) {
+                    cb.checked = checkbox.checked;
+                });
+            } else {
+                var allChecked = true;
+                checkboxes.forEach(function(cb) {
+                    if (cb.value !== 'all' && !cb.checked) {
+                        allChecked = false;
+                    }
+                });
+                checkboxes[0].checked = allChecked;
+            }
+            document.getElementById('filter-form').submit();
+        }
+    </script>
+</body>
 </html>
 

@@ -12,7 +12,12 @@
     </header>
 
     <div class="container">
-        <h1>Manas Receptes</h1>
+        <h1>Manas receptes</h1>
+        @if($recipes->isEmpty())
+            <div class="no-recipes-container">
+                <p class="no-recipes">Šajā kategorijā pagaidām vēl nav receptes</p>
+            </div>
+        @else
         <section class="recipe-grid">
             @foreach($recipes as $recipe)
                 <article class="recipe">
@@ -31,12 +36,12 @@
                                     <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
                                 </button>
                             </form>
-                            <div class="recipe-author">{{ $recipe->user->name }}</div>
                         </div>
                     </div>
                     <div class="edit-delete-buttons">
                         <a href="{{ route('recipes.edit', $recipe->id) }}" class="edit-button">Rediģēt</a>
-                        <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" onsubmit="return confirm('Vai tiešām vēlaties dzēst šo recepti?');">
+                        <form action="{{ route('recipes.destroy', ['recipe' => $recipe->id, 'redirect' => 'mine']) }}" method="POST" onsubmit="return confirm('Vai tiešām vēlaties dzēst šo recepti?');">
+
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete-button">Dzēst</button>
@@ -45,6 +50,7 @@
                 </article>
             @endforeach
         </section>
+        @endif
     </div>
 
     <footer>
@@ -52,11 +58,12 @@
           &copy; <span id="info">2024 <br></span>
           <span class="footer-logo">TT2 eksāmena darbs - </span>
           <strong><i>"E-receptes" </i></strong><br>
-          Autors: <ins>Marta Karīna Skrastiņa (mk23123) & Ivo Aļļēns (ia23031)</ins>
+          Autors: <ins>Marta Karīna Skrastiņa (ms23123) & Ivo Aļļēns (ia23031)</ins>
         </p>
     </footer>
 </body>
 </html>
+
 
 
 

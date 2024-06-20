@@ -52,13 +52,3 @@
 
 </body>
 </html>
-
-        </section>
-    </div>
-
-    <footer>
-        <!-- Jūsu kājenes saturs -->
-    </footer>
-
-</body>
-</html>
