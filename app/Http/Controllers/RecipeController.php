@@ -18,8 +18,11 @@ class RecipeController extends Controller
                     ->orWhere('user_id', Auth::id());
             });
 
-        if ($request->has('category') && !in_array('all', $request->category)) {
-            $recipes->whereIn('category_id', $request->category);
+        if ($request->has('category')) {
+            $categoriesFilter = $request->category;
+            if (!in_array('all', $categoriesFilter)) {
+                $recipes->whereIn('category_id', $categoriesFilter);
+            }
         }
 
         if ($request->filled('sort')) {
@@ -33,6 +36,7 @@ class RecipeController extends Controller
 
         return view('dashboard', compact('recipes', 'categories'));
     }
+
 
     public function myRecipes()
     {
@@ -155,4 +159,16 @@ class RecipeController extends Controller
 
         return redirect()->back();
     }
+
+        public function publicShow($id)
+    {
+        $recipe = Recipe::findOrFail($id);
+
+        if ($recipe->is_private) {
+            abort(403, 'Unauthorized access to private recipe');
+        }
+
+        return view('recipes.public_show', compact('recipe'));
+    }
+
 }

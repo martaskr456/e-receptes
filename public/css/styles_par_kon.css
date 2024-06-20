@@ -32,7 +32,7 @@ nav ul {
 
 nav ul li {
     margin-right: 20px;
-    position: relative; 
+    position: relative;
 }
 
 nav ul li a {
@@ -181,61 +181,101 @@ nav ul .brand {
     background-color: #ffd83c; 
 }
 
-/* Public recipes section styles */
-#public-recipes {
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
+/*info page*/ 
+.content_info {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    text-align: center;
 }
 
-.recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 100%;
+.content_info #about {
+    max-width: 600px; 
+    padding: 20px;
+    background-color: #f8f9fa; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-article.recipe {
-    background-color: #fff;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-article img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.recipe-data {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.recipe-title {
-    font-size: 1.5em;
-    color: #FF8C00;
-    font-weight: bold;
+.content_info h2 {
+    font-size: 2em; 
     margin-bottom: 10px;
 }
 
-.recipe-time {
-    font-size: 1.2em;
-    color: rgba(64, 64, 131, 0.7);
-    margin-bottom: 10px;
+.content_info p {
+    line-height: 1.6;
+    margin-bottom: 15px; 
 }
 
 
+/*contact page*/ 
+.content_contact {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.content_contact h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.content_contact p {
+    margin-bottom: 10px;
+}
+
+.content_contact .contact-info {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.content_contact .contact-info p {
+    margin: 5px 0;
+}
+
+.content_contact form {
+    text-align: left;
+}
+
+.content_contact form .form-group {
+    margin-bottom: 15px;
+}
+
+.content_contact form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.content_contact form input[type="text"],
+.content_contact form input[type="email"],
+.content_contact form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.content_contact form textarea {
+    resize: vertical;
+}
+
+.content_contact form button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content_contact form button:hover {
+    background-color: #45a049;
+}
 
 footer {
     background-color: #f8f9fa;

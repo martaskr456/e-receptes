@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sākums - e-Receptes</title>
-    <link rel="stylesheet" href="{{ asset('css/styles_recipes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles_dashboard.css') }}">
 </head>
 <body>
     <header>
@@ -18,6 +18,7 @@
                 <select id="sort" name="sort">
                     <option value="title" {{ request('sort') == 'title' ? 'selected' : '' }}>Nosaukums</option>
                     <option value="cooking_time" {{ request('sort') == 'cooking_time' ? 'selected' : '' }}>Gatavošanas laiks</option>
+                    <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Pievienošanas laiks</option>
                 </select>
                 <button type="button" class="sort-button" onclick="toggleSortOrder()">
                     <span class="arrow" id="sort-arrow">{{ request('order', 'asc') == 'asc' ? '↑' : '↓' }}</span>
@@ -100,3 +101,4 @@
     }
 </script>
 </html>
+

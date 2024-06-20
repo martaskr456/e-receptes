@@ -8,11 +8,16 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Models\Recipe;
 
 // Public routes
 Route::get('/', function () {
-    return view('welcome');
+    $publicRecipes = Recipe::where('is_private', false)->get();
+    return view('welcome', compact('publicRecipes'));
 })->name('home');
+
+Route::get('/recipe/{id}', [RecipeController::class, 'publicShow'])->name('recipe.publicShow');
+
 
 // Dashboard route (redirects authenticated users to dashboard)
 Route::get('/dashboard', [RecipeController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');

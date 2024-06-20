@@ -1,0 +1,328 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header and navigation styling */
+header {
+    width: 100%;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px -6px #222;
+    border-bottom: 4px solid #FF8C00;
+    padding: 20px 0; 
+}
+
+/* Navigation styles */
+nav {
+    width: 100%;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 0; 
+    box-shadow: 0 4px 6px -6px #222;
+    border-bottom: 4px solid #FF8C00;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 20px;
+    position: relative; 
+}
+
+nav ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 1.2em; 
+}
+
+nav ul li a:hover {
+    background-color: #f1f1f1;
+}
+
+nav ul .brand {
+    margin-left: 20px;
+    flex-grow: 1;
+    text-transform: none;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 200px; 
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Logout button styles */
+.logout-button {
+    background-color: transparent;
+    border: 2px solid #FF8C00;
+    color: #FF8C00;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #FF8C00;
+    color: #fff;
+}
+
+/* Filters Navigation */
+nav.filters-nav {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 80px; 
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 999;
+    padding: 20px 40px; 
+    box-shadow: none;
+    border: none;
+    box-shadow: 0 4px 6px -6px #222;
+}
+
+.filters-nav .filters {
+    display: flex;
+    align-items: center;
+}
+
+.filters-nav label,
+.filters-nav select,
+.filters-nav button {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.filters-nav .sort-button {
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    padding: 10px 15px; 
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filters-nav .sort-button:hover {
+    background-color: #e67e00;
+}
+
+.filters-nav .sort-button .arrow {
+    font-size: 1em; 
+    margin-left: 5px;
+}
+
+.category-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.category-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.category-dropdown-content label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.category-dropdown:hover .category-dropdown-content {
+    display: block;
+}
+
+/* Main content styling */
+.container {
+    flex: 1;  
+    margin-top: 150px; 
+    padding: 20px;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.recipe {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.recipe img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.recipe-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+.recipe-title {
+    font-size: 1.5em;
+    color: #FF8C00;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.recipe-time {
+    font-size: 1.2em;
+    color: rgba(64, 64, 131, 0.7);
+    margin-bottom: 10px;
+}
+
+.recipe-author {
+    font-size: 1em;
+    color: rgba(64, 64, 131, 0.7);
+    text-align: right;
+    margin-top: auto;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.liked {
+    color: red;
+}
+
+.unliked {
+    color: gray;
+}
+
+/* Hide buttons initially */
+.edit-delete-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.edit-button, .delete-button {
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px; 
+    text-transform: uppercase;
+    text-decoration: none;
+    box-sizing: border-box; 
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #e67e00;
+}
+
+/* Show buttons on hover */
+.recipe:hover .edit-delete-buttons {
+    opacity: 1;
+}
+
+.recipe:hover img {
+    opacity: 0.3;
+}
+
+/* Footer styles */
+footer {
+    background-color: #f8f9fa;
+    color: #FF8C00;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}

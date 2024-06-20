@@ -31,10 +31,29 @@
     </div>
 
     <section id="public-recipes">
-        <h2>Public Recipes</h2>
-        <!-- Add a grid or list of public recipes (photo, title, cooking time) -->
+        <div class="recipe-grid">
+            @foreach($publicRecipes as $recipe)
+                <article class="recipe">
+                    <a href="{{ route('recipe.publicShow', $recipe->id) }}">
+                        <img src="{{ str_starts_with($recipe->image, 'images/') ? asset($recipe->image) : asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}">
+                    </a>
+                    <div class="recipe-data">
+                        <div class="recipe-title">{{ $recipe->title }}</div>
+                        <div class="recipe-time">{{ $recipe->cooking_time }} min</div>
+                    </div>
+                </article>
+            @endforeach
+        </div>
     </section>
+
+    <footer>
+        <p>
+          &copy; <span id="info">2024 <br></span>
+          <span class="footer-logo">TT2 eksāmena darbs - </span>
+          <strong><i>"E-receptes" </i></strong><br>
+          Autors: <ins>Marta Karīna Skrastiņa (mk23123) & Ivo Aļļēns (ia23031)</ins>
+        </p>
+    </footer>
 </body>
 </html>
-
 
