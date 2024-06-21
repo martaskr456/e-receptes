@@ -15,7 +15,7 @@
         <form id="filter-form" method="GET" action="{{ route('dashboard') }}">
             <div class="filters">
                 <label for="sort">Kārtošana pēc:</label>
-                <select id="sort" name="sort">
+                <select id="sort" name="sort" onchange="document.getElementById('filter-form').submit()">
                     <option value="title" {{ request('sort') == 'title' ? 'selected' : '' }}>Nosaukums</option>
                     <option value="cooking_time" {{ request('sort') == 'cooking_time' ? 'selected' : '' }}>Gatavošanas laiks</option>
                     <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Pievienošanas laiks</option>
@@ -28,9 +28,9 @@
                 <div class="category-dropdown" style="margin-left: 20px;">
                     <button type="button">Kategorijas</button>
                     <div class="category-dropdown-content">
-                        <label><input type="checkbox" name="category[]" value="all" {{ !request()->has('category') || in_array('all', request('category', [])) ? 'checked' : '' }} onchange="toggleCheckboxes(this)"> Visas kategorijas</label>
+                        <label><input type="checkbox" name="category[]" value="all" {{ !request()->has('category') || in_array('all', request('category', [])) ? 'checked' : '' }} onchange="toggleCheckboxes(this, 'all')"> Visas kategorijas</label>
                         @foreach($categories as $category)
-                            <label><input type="checkbox" name="category[]" value="{{ $category->id }}" {{ request()->has('category') && in_array($category->id, request('category', [])) ? 'checked' : '' }}> {{ $category->name }}</label>
+                            <label><input type="checkbox" name="category[]" value="{{ $category->id }}" {{ request()->has('category') && in_array($category->id, request('category', [])) ? 'checked' : '' }} onchange="toggleCheckboxes(this, '{{ $category->id }}')"> {{ $category->name }}</label>
                         @endforeach
                     </div>
                 </div>
@@ -87,24 +87,26 @@
             document.getElementById('filter-form').submit();
         }
 
-        function toggleCheckboxes(checkbox) {
+        function toggleCheckboxes(checkbox, value) {
             var checkboxes = document.querySelectorAll('.category-dropdown-content input[type="checkbox"]');
-            if (checkbox.value === 'all') {
+            if (value === 'all') {
                 checkboxes.forEach(function(cb) {
                     cb.checked = checkbox.checked;
                 });
             } else {
-                var allChecked = true;
-                checkboxes.forEach(function(cb) {
-                    if (cb.value !== 'all' && !cb.checked) {
-                        allChecked = false;
+                if (checkbox.checked) {
+                    checkboxes[0].checked = false; // Uncheck "all" if specific category is checked
+                } else {
+                    var anyChecked = Array.from(checkboxes).slice(1).some(function(cb) {
+                        return cb.checked;
+                    });
+                    if (!anyChecked) {
+                        checkboxes[0].checked = true; // Check "all" if no specific category is checked
                     }
-                });
-                checkboxes[0].checked = allChecked;
+                }
             }
             document.getElementById('filter-form').submit();
         }
     </script>
 </body>
 </html>
-
