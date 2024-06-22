@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\Category;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
@@ -15,7 +16,7 @@ class RecipeController extends Controller
         $recipes = Recipe::query()
             ->where(function ($query) {
                 $query->where('is_private', false)
-                    ->orWhere('user_id', Auth::id());
+                      ->orWhere('user_id', Auth::id());
             });
 
         if ($request->has('category')) {
@@ -64,8 +65,6 @@ class RecipeController extends Controller
         return view('recipes.mine', compact('recipes', 'categories'));
     }
 
-
-
     public function publicRecipes(Request $request)
     {
         $categories = Category::all();
@@ -91,6 +90,31 @@ class RecipeController extends Controller
         return view('recipes.public', compact('recipes', 'categories'));
     }
 
+    public function likedRecipes(Request $request)
+    {
+        $user = Auth::user();
+        $categories = Category::all();
+
+        $recipes = $user->likedRecipes();
+
+        if ($request->has('category')) {
+            $categoriesFilter = $request->category;
+            if (!in_array('all', $categoriesFilter)) {
+                $recipes->whereIn('category_id', $categoriesFilter);
+            }
+        }
+
+        if ($request->filled('sort')) {
+            $order = $request->input('order', 'asc');
+            $recipes->orderBy($request->sort, $order);
+        } else {
+            $recipes->orderBy('title');
+        }
+
+        $recipes = $recipes->get();
+
+        return view('recipes.liked', compact('recipes', 'categories'));
+    }
 
     public function likeRecipe(Recipe $recipe)
     {
@@ -136,13 +160,12 @@ class RecipeController extends Controller
 
         $validatedData['image'] = $request->file('image')->store('recipe_images', 'public');
 
-        Recipe::create($validatedData);
+        $recipe = Recipe::create($validatedData);
 
         $redirectTo = $request->input('redirect_to', route('dashboard'));
 
         return redirect($redirectTo)->with('success', 'Recepte veiksmīgi pievienota!');
     }
-
 
     public function edit(Recipe $recipe)
     {
@@ -189,7 +212,7 @@ class RecipeController extends Controller
 
     public function destroy(Request $request, Recipe $recipe)
     {
-        if ($recipe->user_id !== Auth::id()) {
+        if ($recipe->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
             abort(403, 'Unauthorized access');
         }
 
@@ -203,33 +226,6 @@ class RecipeController extends Controller
         return redirect()->route('dashboard')->with('success', 'Recepte dzēsta veiksmīgi!');
     }
 
-    public function likedRecipes(Request $request)
-    {
-        $user = Auth::user();
-        $categories = Category::all();
-
-        $recipes = $user->likedRecipes();
-
-        if ($request->has('category')) {
-            $categoriesFilter = $request->category;
-            if (!in_array('all', $categoriesFilter)) {
-                $recipes->whereIn('category_id', $categoriesFilter);
-            }
-        }
-
-        if ($request->filled('sort')) {
-            $order = $request->input('order', 'asc');
-            $recipes->orderBy($request->sort, $order);
-        } else {
-            $recipes->orderBy('title');
-        }
-
-        $recipes = $recipes->get();
-
-        return view('recipes.liked', compact('recipes', 'categories'));
-    }
-
-
     public function publicShow($id)
     {
         $recipe = Recipe::findOrFail($id);
@@ -239,5 +235,23 @@ class RecipeController extends Controller
         }
 
         return view('recipes.public_show', compact('recipe'));
+    }
+
+    // Add this method for the admin to view messages
+    public function messages()
+    {
+        $messages = Message::all();
+
+        return view('admin.messages', compact('messages'));
+    }
+
+    // Method to mark a message as read
+    public function markMessageAsRead($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->is_read = true;
+        $message->save();
+
+        return redirect()->route('admin.messages')->with('success', 'Ziņa atzīmēta kā izlasīta.');
     }
 }

@@ -164,68 +164,69 @@ nav.filters-nav {
     display: block;
 }
 
-/* Recipe Styles */
 main {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 140px; /* Adjusted to make space for both nav bars */
-    padding-top: 20px;
-}
-
-section {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
+    margin-top: 80px; /* To make space for the fixed header */
     padding: 20px;
-}
-
-article.recipe {
-    background-color: #fff;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
-    max-width: 450px;
-    max-height: 400px;
-    overflow-y: auto;
-    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
 }
 
-article img {
+.recipe-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.recipe-image img {
     width: 100%;
     height: auto;
-    border-radius: 5px;
+    object-fit: cover;
 }
 
-.recipe-data {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 10px;
+.recipe-details {
+    padding: 20px;
 }
 
-.recipe-title {
-    font-size: 1.5em;
-    color: rgb(64, 64, 131);
-    font-weight: bold;
+.recipe-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.recipe-time {
+.recipe-header h1 {
+    font-size: 2em;
+    color: #FF8C00;
+    margin-bottom: 10px;
+}
+
+.recipe-meta {
     font-size: 1.2em;
     color: rgba(64, 64, 131, 0.7);
 }
 
-.recipe-author {
-    font-size: 1em;
-    color: rgba(64, 64, 131, 0.7);
-    text-align: right;
+.recipe-meta span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.recipe-ingredients,
+.recipe-instructions {
+    margin-bottom: 20px;
+}
+
+.recipe-ingredients h2,
+.recipe-instructions h2 {
+    font-size: 1.5em;
+    color: #FF8C00;
+    margin-bottom: 10px;
+}
+
+.recipe-ingredients p,
+.recipe-instructions p {
+    font-size: 1.2em;
+    color: #333333;
 }
 
 .like-button {
@@ -234,6 +235,8 @@ article img {
     cursor: pointer;
     font-size: 24px;
     color: red;
+    display: block;
+    margin: 0 auto;
 }
 
 .liked {
@@ -244,25 +247,12 @@ article img {
     color: gray;
 }
 
-.add-recipe-btn {
-    text-decoration: none;
-    text-transform: uppercase;
-    background-color: #ff8c00d5;
-    padding: 12px 24px;
-    border-radius: 10px;
-}
-
-.add-recipe-btn:hover {
-    background-color: #ff8c00d5;
-    color: white;
-}
-
 footer {
     background-color: #f8f9fa;
     color: #FF8C00;
     text-align: center;
     padding: 10px 0;
+    width: 100%;
     position: fixed;
     bottom: 0;
-    width: 100%;
 }

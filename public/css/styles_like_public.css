@@ -15,6 +15,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     overflow-x: hidden; 
+    min-height: 100vh; /* Apvienots no diviem body selektoriem */
 }
 
 /* Header and navigation styling */
@@ -112,7 +113,7 @@ nav.filters-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 80px; 
+    top: 72px; 
     left: 0;
     width: 100%;
     background-color: #ffffff;
@@ -211,12 +212,7 @@ nav.filters-nav {
     color: #fff;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
+/* Footer styles */
 footer {
     background-color: #f8f9fa;
     color: #FF8C00;
@@ -226,6 +222,7 @@ footer {
     margin-top: auto;
 }
 
+/* Container and main content */
 .container {
     text-align: center;
     margin-top: 150px; 

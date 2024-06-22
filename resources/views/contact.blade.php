@@ -37,6 +37,10 @@
                     <textarea id="message" name="message" rows="4" required></textarea>
                 </div>
                 <button type="submit">Nosūtīt</button>
+
+                @if(session('success'))
+                <p class="success-message">{{ session('success') }}</p>
+                @endif
             </form>
         </section>
     </div>
@@ -50,5 +54,12 @@
         </p>
     </footer>
 
+    <style>
+        .success-message {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
 </body>
 </html>

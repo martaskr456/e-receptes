@@ -37,7 +37,9 @@
             </div>
             <button type="submit" style="display: none;">Filtrēt</button>
         </form>
-        <a href="{{ route('recipes.create') }}" class="add-recipe-btn">Pievienot</a>
+        @if(Auth::user()->role !== 'admin')
+            <a href="{{ route('recipes.create') }}" class="add-recipe-btn">Pievienot</a>
+        @endif
     </nav>
 
     <main>
@@ -56,12 +58,22 @@
                                 <div class="recipe-time">{{ $recipe->cooking_time }} min</div>
                             </div>
                             <div>
-                                <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="like-button">
-                                        <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
-                                    </button>
-                                </form>
+                                @if(Auth::user()->role === 'admin')
+                                    <div class="edit-delete-buttons">
+                                        <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" onsubmit="return confirm('Vai tiešām vēlaties dzēst šo recepti?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-button">Dzēst</button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="like-button">
+                                            <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
+                                        </button>
+                                    </form>
+                                @endif
                                 <div class="recipe-author">{{ $recipe->user->name }}</div>
                             </div>
                         </div>

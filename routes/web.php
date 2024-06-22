@@ -18,7 +18,6 @@ Route::get('/', function () {
 
 Route::get('/recipe/{id}', [RecipeController::class, 'publicShow'])->name('recipe.publicShow');
 
-
 // Dashboard route (redirects authenticated users to dashboard)
 Route::get('/dashboard', [RecipeController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
@@ -55,13 +54,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
         Route::get('/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
         Route::put('/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
-        Route::delete('/recipes/{recipe}/destroy', [RecipeController::class, 'destroy'])->name('recipes.destroy');
-
+        Route::delete('/{recipe}/destroy', [RecipeController::class, 'destroy'])->name('recipes.destroy');
     });
 
     // Admin routes
     Route::prefix('admin')->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/messages', [AdminController::class, 'messages'])->name('admin.messages');
+        Route::get('/messages/{id}/read', [AdminController::class, 'markMessageAsRead'])->name('admin.markMessageAsRead');
         Route::delete('/{recipe}', [AdminController::class, 'destroy'])->name('admin.destroy');
     });
 

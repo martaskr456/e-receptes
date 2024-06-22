@@ -225,6 +225,8 @@ article.recipe {
     align-items: center;
     justify-content: flex-start;
     height: 350px; 
+    position: relative;
+    overflow: hidden;
 }
 
 article img {
@@ -232,6 +234,7 @@ article img {
     height: 200px; 
     object-fit: cover; 
     border-radius: 5px;
+    transition: opacity 0.3s ease;
 }
 
 .recipe-data {
@@ -293,6 +296,45 @@ article img {
 .add-recipe-btn:hover {
     background-color: #ff8c00d5;
     color: white;
+}
+
+/* Edit/Delete button styles */
+.edit-delete-buttons {
+    display: flex;
+    flex-direction: column;
+    
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.delete-button {
+    background-color: #FF8C00;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+
+.delete-button:hover {
+    background-color: #e67e00;
+}
+
+.recipe:hover .edit-delete-buttons {
+    opacity: 1;
+}
+
+.recipe:hover img {
+    opacity: 0.3;
 }
 
 /* Footer Styles */

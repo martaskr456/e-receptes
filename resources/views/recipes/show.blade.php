@@ -13,28 +13,34 @@
 
     <main>
         <div class="recipe-container">
-            <div class="recipe-header">
-                <h1>{{ $recipe->title }}</h1>
-                <div class="recipe-meta">
-                    <span class="recipe-time">{{ $recipe->cooking_time }} min</span>
-                    <span class="recipe-author">Autors: {{ $recipe->user->name }}</span>
-                </div>
-            </div>
             <div class="recipe-image">
                 <img src="{{ str_starts_with($recipe->image, 'images/') ? asset($recipe->image) : asset('storage/' . $recipe->image) }}" alt="{{ $recipe->title }}">
             </div>
             <div class="recipe-details">
-                <h2>Sastāvdaļas</h2>
-                <p>{{ $recipe->ingredients }}</p>
-                <h2>Pagatavošana</h2>
-                <p>{{ $recipe->instructions }}</p>
+                <div class="recipe-header">
+                    <h1>{{ $recipe->title }}</h1>
+                    <div class="recipe-meta">
+                        <span class="recipe-time">{{ $recipe->cooking_time }} min</span>
+                        <span class="recipe-author">Autors: {{ $recipe->user->name }}</span>
+                    </div>
+                </div>
+                <div class="recipe-ingredients">
+                    <h2>Sastāvdaļas</h2>
+                    <p>{{ $recipe->ingredients }}</p>
+                </div>
+                <div class="recipe-instructions">
+                    <h2>Pagatavošana</h2>
+                    <p>{{ $recipe->instructions }}</p>
+                </div>
             </div>
-            <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="like-button">
-                    <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
-                </button>
-            </form>
+            @if(Auth::user()->role !== 'admin')
+                <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="like-button">
+                        <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
+                    </button>
+                </form>
+            @endif
         </div>
     </main>
 
