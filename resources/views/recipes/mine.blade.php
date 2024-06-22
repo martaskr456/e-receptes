@@ -73,6 +73,7 @@
                             <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" onsubmit="return confirm('Vai tiešām vēlaties dzēst šo recepti?');">
                                 @csrf
                                 @method('DELETE')
+                                <input type="hidden" name="redirect" value="mine">
                                 <button type="submit" class="delete-button">Dzēst</button>
                             </form>
                         </div>

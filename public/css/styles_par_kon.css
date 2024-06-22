@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 section {
     padding: 40px;
     margin-bottom: 20px;
@@ -19,7 +25,6 @@ nav {
     padding: 20px 0; 
     box-shadow: 0 4px 6px -6px #222;
     border-bottom: 4px solid #FF8C00;
-    margin-bottom: 20px;
 }
 
 nav ul {
@@ -101,7 +106,7 @@ nav ul .brand {
     color: #fff;
 }
 
-
+/* Banner Styles */
 #banner {
     width: 100%;
     height: 400px;
@@ -125,6 +130,7 @@ nav ul .brand {
     letter-spacing: 5px; 
 }
 
+/* Login and Register Styles */
 #login {
     text-align: center;
     padding: 40px 20px;
@@ -157,7 +163,7 @@ nav ul .brand {
     text-transform: uppercase; 
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background-color: #FFDE59; 
+    background-color: #FF8C00; 
     color: white; 
     border: none; 
     border-radius: 5px; 
@@ -167,21 +173,11 @@ nav ul .brand {
     padding-bottom: 15px;
 }
 
-.login-register .login-button {
-    padding: 20px 30px; 
-    margin-right: 10px; 
-}
-
-.login-register .register-button {
-    padding: 10px 20px; 
-    margin-left: 10px;
-}
-
 .login-register button:hover {
-    background-color: #ffd83c; 
+    background-color: #e67e00; 
 }
 
-/*info page*/ 
+/* Info Page Styles */
 .content_info {
     display: flex; 
     justify-content: center; 
@@ -208,13 +204,13 @@ nav ul .brand {
     margin-bottom: 15px; 
 }
 
-
-/*contact page*/ 
+/* Contact Page Styles */ 
 .content_contact {
     max-width: 800px;
     margin: 10px auto;
     padding: 20px;
     text-align: center;
+    flex: 1;
 }
 
 .content_contact h2 {
@@ -266,7 +262,7 @@ nav ul .brand {
 .content_contact form button {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #4CAF50;
+    background-color: #FF8C00;
     color: white;
     border: none;
     border-radius: 5px;
@@ -274,7 +270,7 @@ nav ul .brand {
 }
 
 .content_contact form button:hover {
-    background-color: #45a049;
+    background-color: #e67e00;
 }
 
 footer {
@@ -283,4 +279,16 @@ footer {
     text-align: center;
     padding: 10px 0;
     width: 100%;
+    margin-top: auto;
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: larger;
+}
+
+h2{
+    color: #FF8C00;
 }

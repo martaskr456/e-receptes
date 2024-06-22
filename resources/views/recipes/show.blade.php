@@ -26,21 +26,30 @@
                 </div>
                 <div class="recipe-ingredients">
                     <h2>Sastāvdaļas</h2>
-                    <p>{{ $recipe->ingredients }}</p>
+                    <p>{!! nl2br(e($recipe->ingredients)) !!}</p>
                 </div>
                 <div class="recipe-instructions">
                     <h2>Pagatavošana</h2>
-                    <p>{{ $recipe->instructions }}</p>
+                    <p>{!! nl2br(e($recipe->instructions)) !!}</p>
                 </div>
             </div>
-            @if(Auth::user()->role !== 'admin')
-                <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="like-button">
-                        <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
-                    </button>
-                </form>
-            @endif
+            <div class="recipe-actions">
+                @if(Auth::user() && Auth::user()->role === 'admin')
+                    <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST" onsubmit="return confirm('Vai tiešām vēlaties dzēst šo recepti?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Dzēst recepti</button>
+                    </form>
+                @endif
+                @if(Auth::user() && Auth::user()->role !== 'admin')
+                    <form action="{{ route('recipes.like', $recipe->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="like-button">
+                            <span class="{{ Auth::user()->likedRecipes->contains($recipe->id) ? 'liked' : 'unliked' }}">&#9829;</span>
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
     </main>
 
@@ -54,3 +63,4 @@
     </footer>
 </body>
 </html>
+

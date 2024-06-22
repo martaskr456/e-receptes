@@ -53,13 +53,5 @@
           Autors: <ins>Marta Karīna Skrastiņa (ms23123) & Ivo Aļļēns (ia23031)</ins>
         </p>
     </footer>
-
-    <style>
-        .success-message {
-            color: green;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    </style>
 </body>
 </html>
