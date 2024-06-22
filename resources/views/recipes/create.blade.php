@@ -15,6 +15,7 @@
         <h1 class="page-title">Izveidot jaunu recepti</h1>
         <form action="{{ route('recipes.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="redirect_to" value="{{ url()->previous() }}">
             <div class="form-group">
                 <label for="title">Nosaukums</label>
                 <input type="text" class="form-control" id="title" name="title" required>

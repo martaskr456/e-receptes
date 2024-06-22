@@ -39,23 +39,69 @@ class RecipeController extends Controller
 
     // Pārējās metodes nemainītas
 
-    public function myRecipes()
+    public function myRecipes(Request $request)
     {
-        $recipes = Recipe::where('user_id', Auth::id())->get();
-        return view('recipes.mine', compact('recipes'));
+        $categories = Category::all();
+        $recipes = Recipe::query()
+            ->where('user_id', Auth::id());
+
+        if ($request->has('category')) {
+            $categoriesFilter = $request->category;
+            if (!in_array('all', $categoriesFilter)) {
+                $recipes->whereIn('category_id', $categoriesFilter);
+            }
+        }
+
+        if ($request->filled('sort')) {
+            $order = $request->input('order', 'asc');
+            $recipes->orderBy($request->sort, $order);
+        } else {
+            $recipes->orderBy('title');
+        }
+
+        $recipes = $recipes->get();
+
+        return view('recipes.mine', compact('recipes', 'categories'));
     }
 
-    public function publicRecipes()
+
+
+    public function publicRecipes(Request $request)
     {
-        $recipes = Recipe::where('is_private', false)->get();
-        return view('recipes.public', compact('recipes'));
+        $categories = Category::all();
+        $recipes = Recipe::query()
+            ->where('is_private', false);
+
+        if ($request->has('category')) {
+            $categoriesFilter = $request->category;
+            if (!in_array('all', $categoriesFilter)) {
+                $recipes->whereIn('category_id', $categoriesFilter);
+            }
+        }
+
+        if ($request->filled('sort')) {
+            $order = $request->input('order', 'asc');
+            $recipes->orderBy($request->sort, $order);
+        } else {
+            $recipes->orderBy('title');
+        }
+
+        $recipes = $recipes->get();
+
+        return view('recipes.public', compact('recipes', 'categories'));
     }
 
-    public function likedRecipes()
+
+    public function likeRecipe(Recipe $recipe)
     {
         $user = Auth::user();
-        $recipes = $user->likedRecipes;
-        return view('recipes.liked', compact('recipes'));
+        if ($user->likedRecipes()->where('recipe_id', $recipe->id)->exists()) {
+            $user->likedRecipes()->detach($recipe->id);
+        } else {
+            $user->likedRecipes()->attach($recipe->id);
+        }
+
+        return redirect()->back();
     }
 
     public function show(Recipe $recipe)
@@ -92,8 +138,11 @@ class RecipeController extends Controller
 
         Recipe::create($validatedData);
 
-        return redirect()->route('dashboard')->with('success', 'Recepte veiksmīgi pievienota!');
+        $redirectTo = $request->input('redirect_to', route('dashboard'));
+
+        return redirect($redirectTo)->with('success', 'Recepte veiksmīgi pievienota!');
     }
+
 
     public function edit(Recipe $recipe)
     {
@@ -154,17 +203,32 @@ class RecipeController extends Controller
         return redirect()->route('dashboard')->with('success', 'Recepte dzēsta veiksmīgi!');
     }
 
-    public function likeRecipe(Recipe $recipe)
+    public function likedRecipes(Request $request)
     {
         $user = Auth::user();
-        if ($user->likedRecipes()->where('recipe_id', $recipe->id)->exists()) {
-            $user->likedRecipes()->detach($recipe->id);
-        } else {
-            $user->likedRecipes()->attach($recipe->id);
+        $categories = Category::all();
+
+        $recipes = $user->likedRecipes();
+
+        if ($request->has('category')) {
+            $categoriesFilter = $request->category;
+            if (!in_array('all', $categoriesFilter)) {
+                $recipes->whereIn('category_id', $categoriesFilter);
+            }
         }
 
-        return redirect()->back();
+        if ($request->filled('sort')) {
+            $order = $request->input('order', 'asc');
+            $recipes->orderBy($request->sort, $order);
+        } else {
+            $recipes->orderBy('title');
+        }
+
+        $recipes = $recipes->get();
+
+        return view('recipes.liked', compact('recipes', 'categories'));
     }
+
 
     public function publicShow($id)
     {
