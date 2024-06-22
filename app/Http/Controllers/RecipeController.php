@@ -37,6 +37,7 @@ class RecipeController extends Controller
         return view('dashboard', compact('recipes', 'categories'));
     }
 
+    // Pārējās metodes nemainītas
 
     public function myRecipes()
     {
@@ -53,7 +54,7 @@ class RecipeController extends Controller
     public function likedRecipes()
     {
         $user = Auth::user();
-        $recipes = $user->likedRecipes; // Assuming there's a likedRecipes relation
+        $recipes = $user->likedRecipes;
         return view('recipes.liked', compact('recipes'));
     }
 
@@ -137,7 +138,6 @@ class RecipeController extends Controller
         return redirect()->route('recipes.mine')->with('success', 'Recepte atjaunināta veiksmīgi!');
     }
 
-
     public function destroy(Request $request, Recipe $recipe)
     {
         if ($recipe->user_id !== Auth::id()) {
@@ -154,7 +154,6 @@ class RecipeController extends Controller
         return redirect()->route('dashboard')->with('success', 'Recepte dzēsta veiksmīgi!');
     }
 
-
     public function likeRecipe(Recipe $recipe)
     {
         $user = Auth::user();
@@ -167,7 +166,7 @@ class RecipeController extends Controller
         return redirect()->back();
     }
 
-        public function publicShow($id)
+    public function publicShow($id)
     {
         $recipe = Recipe::findOrFail($id);
 
@@ -177,5 +176,4 @@ class RecipeController extends Controller
 
         return view('recipes.public_show', compact('recipe'));
     }
-
 }
