@@ -114,6 +114,11 @@
         background-color: #FF8C00;
         color: #fff;
     }
+
+    .container {
+        padding-top: 300px;
+        padding-left: 500px
+        }
     .profile-info {
         border: 1px solid #FF8C00;
         padding: 20px;
@@ -121,9 +126,10 @@
         max-width: 500px;
         margin: 130px auto;
         background-color: #f9f9f9;
+
     }
     .profile-info p {
-        font-size: 1.2em;
+        font-size: 2em;
         margin-bottom: 10px;
     }
 </style>

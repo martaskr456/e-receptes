@@ -34,4 +34,9 @@ class Recipe extends Model
     {
         return !$this->is_private;
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

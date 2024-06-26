@@ -20,6 +20,7 @@
                 <div class="recipe-header">
                     <h1>{{ $recipe->title }}</h1>
                     <div class="recipe-meta">
+                        <span class="recipe-category">Kategorija: {{ $recipe->category->name }}</span>
                         <span class="recipe-time">{{ $recipe->cooking_time }} min</span>
                         <span class="recipe-author">Autors: {{ $recipe->user->name }}</span>
                     </div>
@@ -63,4 +64,3 @@
     </footer>
 </body>
 </html>
-
